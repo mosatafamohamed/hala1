@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-navy: 26 48 80;
+  --color-sky: 91 143 185;
+  --color-bronze: 168 124 81;
+  --color-white: 255 255 255;
+  --color-slate: 225 232 237;
+  --color-border: 201 212 222;
+  --container-max: 1280px;
+  --section-space: clamp(4.5rem, 7vw, 7.25rem);
+}
+
+* {
+  border-color: rgb(var(--color-border));
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:
+    radial-gradient(circle at 16% 10%, rgba(91, 143, 185, 0.12), transparent 36%),
+    radial-gradient(circle at 88% 8%, rgba(168, 124, 81, 0.08), transparent 32%),
+    linear-gradient(180deg, #f7f9fb 0%, #edf2f6 62%, #e6edf2 100%);
+  color: rgb(var(--color-navy));
+  font-family: var(--font-body), sans-serif;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading), sans-serif;
+    letter-spacing: -0.026em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer utilities {
+  .container-shell {
+    width: min(100% - 2rem, var(--container-max));
+    margin-inline: auto;
+  }
+
+  .section-shell {
+    padding-block: var(--section-space);
+  }
+
+  .surface-card {
+    @apply rounded-card border border-border/70 bg-white shadow-card;
+  }
+
+  .surface-card-strong {
+    @apply rounded-card border border-border/60 bg-white shadow-soft;
+  }
+
+  .card-hover-lift {
+    @apply transition duration-500 ease-out hover:-translate-y-1.5 hover:shadow-soft;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      112deg,
+      rgba(12, 27, 47, 0.94) 0%,
+      rgba(18, 38, 63, 0.83) 44%,
+      rgba(26, 48, 80, 0.76) 72%,
+      rgba(26, 48, 80, 0.65) 100%
+    );
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-soft border border-bronze/70 bg-bronze px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(168,124,81,0.34)] transition duration-300 hover:-translate-y-0.5 hover:brightness-105 focus:outline-none focus:ring-2 focus:ring-bronze/40;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-soft border border-navy/75 bg-white px-6 py-3 text-sm font-semibold text-navy transition duration-300 hover:border-navy hover:bg-navy/5 focus:outline-none focus:ring-2 focus:ring-navy/20;
+  }
+
+  .premium-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-navy/20 to-transparent;
+  }
+
+  .badge-premium {
+    @apply inline-flex rounded-full border border-bronze/45 bg-bronze/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-bronze;
+  }
+
+  .meta-chip {
+    @apply rounded-full border border-border/80 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-navy/65;
+  }
+
+  .wm-overlay {
+    background-image:
+      repeating-linear-gradient(
+        -27deg,
+        rgba(255, 255, 255, 0.12) 0px,
+        rgba(255, 255, 255, 0.12) 1px,
+        transparent 1px,
+        transparent 150px
+      );
+  }
+
+  .wm-overlay::before {
+    content: attr(data-wm);
+    position: absolute;
+    inset: -35%;
+    display: grid;
+    place-content: center;
+    font-family: var(--font-heading), sans-serif;
+    font-size: clamp(1rem, 2.2vw, 1.4rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.18);
+    transform: rotate(-24deg);
+    white-space: nowrap;
+  }
+}

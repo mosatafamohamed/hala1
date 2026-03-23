@@ -1,0 +1,54 @@
+﻿<svg width="1200" height="720" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#142846"/>
+      <stop offset="1" stop-color="#2A4E73"/>
+    </linearGradient>
+    <radialGradient id="warm" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1230 180) rotate(134) scale(520 410)">
+      <stop stop-color="#A87C51" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#warm)"/>
+
+  <g opacity="0.22" stroke="#FFFFFF" stroke-width="1.1">
+    <path d="M0 690H1600"/>
+    <path d="M0 610H1600"/>
+    <path d="M0 530H1600"/>
+    <path d="M0 450H1600"/>
+    <path d="M0 370H1600"/>
+    <path d="M120 0V900"/>
+    <path d="M280 0V900"/>
+    <path d="M440 0V900"/>
+    <path d="M600 0V900"/>
+    <path d="M760 0V900"/>
+    <path d="M920 0V900"/>
+    <path d="M1080 0V900"/>
+    <path d="M1240 0V900"/>
+    <path d="M1400 0V900"/>
+  </g>
+
+  <g fill="#FFFFFF2F">
+    <rect x="250" y="500" width="170" height="120" rx="14"/><rect x="450" y="470" width="170" height="150" rx="14"/><rect x="650" y="490" width="170" height="130" rx="14"/><rect x="860" y="450" width="210" height="170" rx="14"/><path d="M1120 470h180v150h-180z"/>
+  </g>
+
+  <path d="M0 735C240 660 430 758 700 704C960 654 1170 555 1600 646V900H0V735Z" fill="#A87C51" fill-opacity="0.24"/>
+
+  <g transform="translate(120 120)">
+    <rect x="0" y="0" width="380" height="118" rx="18" fill="#FFFFFF10"/>
+    <text x="28" y="48" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="18" letter-spacing="2">1HALA</text>
+    <text x="28" y="80" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-weight="700" font-size="32">Fertilizers</text>
+    <text x="28" y="102" fill="#DDE7F1" font-family="Inter, sans-serif" font-size="13">Agronomy Input Distribution</text>
+  </g>
+
+  <rect width="1600" height="900" filter="url(#grain)" opacity="0.28"/>
+</svg>
+
