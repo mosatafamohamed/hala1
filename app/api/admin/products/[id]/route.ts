@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 
+import { revalidateCatalogRoutes, revalidatePublicCmsData } from "@/lib/cms/revalidation";
 import { deleteAdminProduct, getAdminProductById, saveAdminProduct } from "@/lib/cms/admin";
 import { getCurrentAdminUser, unauthorizedResponse } from "@/lib/supabase/auth";
 
@@ -32,6 +33,8 @@ export async function PATCH(request: Request, { params }: ProductRouteContext) {
   try {
     const payload = await request.json();
     const product = await saveAdminProduct({ ...payload, id: params.id });
+    revalidatePublicCmsData();
+    revalidateCatalogRoutes();
     return NextResponse.json({ data: product });
   } catch (error) {
     return NextResponse.json({ error: "Failed to update product", detail: String(error) }, { status: 500 });
@@ -44,6 +47,8 @@ export async function DELETE(_: Request, { params }: ProductRouteContext) {
 
   try {
     await deleteAdminProduct(params.id);
+    revalidatePublicCmsData();
+    revalidateCatalogRoutes();
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: "Failed to delete product", detail: String(error) }, { status: 500 });

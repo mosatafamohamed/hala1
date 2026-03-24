@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-heading: "Trebuchet MS", "Segoe UI Semibold", "Arial Narrow", Arial, sans-serif;
   --color-navy: 26 48 80;
   --color-sky: 91 143 185;
   --color-bronze: 168 124 81;

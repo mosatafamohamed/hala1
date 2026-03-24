@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 
+import { revalidatePublicCmsData, revalidateSharedPublicRoutes } from "@/lib/cms/revalidation";
 import { getAdminHomepageContent, saveAdminHomepageContent } from "@/lib/cms/admin";
 import { getCurrentAdminUser, unauthorizedResponse } from "@/lib/supabase/auth";
 
@@ -23,6 +24,8 @@ export async function PUT(request: Request) {
   try {
     const payload = await request.json();
     await saveAdminHomepageContent(payload);
+    revalidatePublicCmsData();
+    revalidateSharedPublicRoutes();
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: "Failed to save homepage content", detail: String(error) }, { status: 500 });

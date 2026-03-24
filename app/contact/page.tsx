@@ -6,12 +6,15 @@ import { HeroSection } from "@/components/hero-section";
 import { SocialIcon } from "@/components/social-icon";
 import { SectionHeading } from "@/components/section-heading";
 import { Container } from "@/components/ui/container";
+import { CMS_PUBLIC_REVALIDATE_SECONDS } from "@/lib/cms/revalidation";
 import { getCategories, getCompanyInfo, getContactContent } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Contact",
   description: "Connect with 1Hala for premium B2B sourcing, trade partnerships, and strategic inquiry support."
 };
+
+export const revalidate = CMS_PUBLIC_REVALIDATE_SECONDS;
 
 export default async function ContactPage() {
   const [categories, companyInfo, contactContent] = await Promise.all([

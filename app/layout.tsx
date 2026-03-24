@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
 
 import "./globals.css";
 
@@ -7,18 +6,6 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { TopBar } from "@/components/top-bar";
 import { getCompanyInfo } from "@/lib/site-data";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap"
-});
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  display: "swap"
-});
 
 export async function generateMetadata(): Promise<Metadata> {
   const companyInfo = await getCompanyInfo();
@@ -64,7 +51,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${montserrat.variable} bg-slate text-navy antialiased`}>
+      <body className="bg-slate text-navy antialiased">
         <TopBar />
         <Header companyInfo={companyInfo} />
         <main className="min-h-screen">{children}</main>

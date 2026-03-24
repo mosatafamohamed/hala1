@@ -2,9 +2,10 @@ import { categories as fallbackCategories } from "@/data/categories";
 import { companyInfo as fallbackCompanyInfo } from "@/data/company";
 import { hubs as fallbackHubs } from "@/data/hubs";
 import { products as fallbackProducts } from "@/data/products";
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
 import { hasSupabaseServiceEnv } from "@/lib/supabase/env";
+import { CMS_PUBLIC_REVALIDATE_SECONDS, CMS_PUBLIC_SITE_CACHE_TAG } from "@/lib/cms/revalidation";
 import { Category, CompanyInfo, Hub, Product } from "@/lib/types";
 
 type PublicHomepageContent = {
@@ -355,13 +356,7 @@ async function fetchFromSupabase(): Promise<PublicSiteContent | null> {
   }
 }
 
-export const getPublicSiteContent = cache(async (): Promise<PublicSiteContent> => {
-  const cmsContent = await fetchFromSupabase();
-
-  if (cmsContent) {
-    return cmsContent;
-  }
-
+function buildFallbackPublicSiteContent(): PublicSiteContent {
   return {
     companyInfo: fallbackCompanyInfo,
     hubs: fallbackHubs,
@@ -381,4 +376,14 @@ export const getPublicSiteContent = cache(async (): Promise<PublicSiteContent> =
     homepage: fallbackHomepage,
     contact: fallbackContact
   };
+}
+
+const getCachedPublicSiteContent = unstable_cache(fetchFromSupabase, ["cms-public-site-content"], {
+  revalidate: CMS_PUBLIC_REVALIDATE_SECONDS,
+  tags: [CMS_PUBLIC_SITE_CACHE_TAG]
 });
+
+export async function getPublicSiteContent(): Promise<PublicSiteContent> {
+  const cmsContent = await getCachedPublicSiteContent();
+  return cmsContent ?? buildFallbackPublicSiteContent();
+}

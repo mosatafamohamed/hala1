@@ -8,6 +8,7 @@ import { InquirySection } from "@/components/inquiry-section";
 import { ProductCard } from "@/components/product-card";
 import { ProductGallery } from "@/components/product-gallery";
 import { Container } from "@/components/ui/container";
+import { CMS_PUBLIC_REVALIDATE_SECONDS } from "@/lib/cms/revalidation";
 import {
   getCategories,
   getCategoryBySlug,
@@ -21,6 +22,8 @@ type ProductDetailPageProps = {
     slug: string;
   };
 };
+
+export const revalidate = CMS_PUBLIC_REVALIDATE_SECONDS;
 
 export async function generateStaticParams() {
   const products = await getProducts();

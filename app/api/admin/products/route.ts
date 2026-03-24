@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 
+import { revalidateCatalogRoutes, revalidatePublicCmsData } from "@/lib/cms/revalidation";
 import { getCurrentAdminUser, unauthorizedResponse } from "@/lib/supabase/auth";
 import { listAdminProducts, saveAdminProduct } from "@/lib/cms/admin";
 
@@ -23,6 +24,8 @@ export async function POST(request: Request) {
   try {
     const payload = await request.json();
     const product = await saveAdminProduct(payload);
+    revalidatePublicCmsData();
+    revalidateCatalogRoutes();
     return NextResponse.json({ data: product });
   } catch (error) {
     return NextResponse.json({ error: "Failed to save product", detail: String(error) }, { status: 500 });

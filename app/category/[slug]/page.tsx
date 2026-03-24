@@ -7,6 +7,7 @@ import { PortfolioGrid } from "@/components/portfolio-grid";
 import { ProcessSection } from "@/components/process-section";
 import { SectionHeading } from "@/components/section-heading";
 import { Container } from "@/components/ui/container";
+import { CMS_PUBLIC_REVALIDATE_SECONDS } from "@/lib/cms/revalidation";
 import {
   getCategories,
   getCategoryBySlug,
@@ -20,6 +21,8 @@ type CategoryPageProps = {
     slug: string;
   };
 };
+
+export const revalidate = CMS_PUBLIC_REVALIDATE_SECONDS;
 
 export async function generateStaticParams() {
   const categories = await getCategories();

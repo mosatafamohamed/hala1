@@ -8,7 +8,10 @@ import { SocialStrip } from "@/components/social-strip";
 import { StatsStrip } from "@/components/stats-strip";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { CMS_PUBLIC_REVALIDATE_SECONDS } from "@/lib/cms/revalidation";
 import { getCategoriesByHub, getHubs, getHomepageContent } from "@/lib/site-data";
+
+export const revalidate = CMS_PUBLIC_REVALIDATE_SECONDS;
 
 export default async function HomePage() {
   const [allHubs, homepageContent] = await Promise.all([getHubs(), getHomepageContent()]);
